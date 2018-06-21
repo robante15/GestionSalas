@@ -53,9 +53,51 @@ function guardarUsuario(req, res) {
 
 }
 
+//Metodo para iniciar sesion
+function inicioSesion(req, res) {
+    var params = req.body;
+
+    var email = params.email;
+    var contrasena = params.contrasena;
+
+    Usuario.findOne({
+        email: email
+    }, (err, Usuario) => {
+
+        if (Usuario) {
+            bcrypt.compare(contrasena, Usuario.contrasena, (err, check) => {
+                if (check) {
+
+                    if (params.gettoken) {
+                        //Devolver un token
+                        return res.status(200).send({
+                            token: jwt.createToken(Usuario)
+                        });
+                    } else {
+                        //Devolver datos de usuario
+                        Usuario.contrasena = undefined;
+                        return res.status(200).send({
+                            Usuario
+                        });
+                    }
+                } else {
+                    return res.status(404).send({
+                        message: 'Error: El usuario no se ha podido identificar'
+                    });
+                }
+            });
+        } else {
+            return res.status(404).send({
+                message: 'Error: El usuario no se ha podido identificar'
+            });
+        }
+    });
+}
+
 /* ------------------------------ FIN DE LOS METODOS ------------------------------*/
 
 module.exports = {
     pruebaUsuario,
-    guardarUsuario
+    guardarUsuario,
+    inicioSesion
 }

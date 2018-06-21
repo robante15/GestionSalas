@@ -10,6 +10,7 @@ var LocalSchema = Schema({
         ref: 'Ubicacion'
     },
     text: String,
+    capacidad: String,
     file: String,
     created_at: String
 });

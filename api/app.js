@@ -9,6 +9,8 @@ var app = express();
 
 //Cargar rutas
 var user_routes = require('./routes/usuario');
+var ubicacion_routes = require('./routes/ubicacion');
+var local_routes = require('./routes/local');
 
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,6 +28,8 @@ app.use((req, res, next) => {
 
 //Rutas
 app.use('/api', user_routes);
+app.use('/api', ubicacion_routes);
+app.use('/api', local_routes)
 
 //Exportar
 module.exports = app;

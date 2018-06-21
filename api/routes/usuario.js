@@ -19,8 +19,8 @@ api.get('/counters/:id?', md_auth.ensuerAuth ,UserController.getCounters); */
 
 //Metodos POST
 api.post('/registrar', UsuarioController.guardarUsuario);
-/*api.post('/login', UserController.loginUser);
-api.post('/search-user/:page?', md_auth.ensuerAuth, UserController.searchUsers);
+api.post('/inicioSesion', UsuarioController.inicioSesion);
+/*api.post('/search-user/:page?', md_auth.ensuerAuth, UserController.searchUsers);
 api.post('/upload-image-user/:id', [md_auth.ensuerAuth, md_upload], UserController.uploadImage); */
 
 //Metodo PUT

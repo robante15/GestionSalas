@@ -3,18 +3,17 @@
 //Importar el uso de Mongoose 
 var mongoose = require('mongoose');
 var app = require('./app');
-var ip = 'localhost'
+var ip = 'localhos'
 var port = '3800';
-var bdPort = '27017';
-var bdIP = 'localhost';
-/*var user = 'SuperUserChingon';
-var passwd = 'puQ8ENR6lY';
-var bd = 'RedSocial';*/
+var bdPort = '31070';
+var bdIP = 'ds231070.mlab.com';
+var user = 'Desarrollador';
+var passwd = 'ues12345678';
+var bd = 'gestion_salas';
 
 //Conexion a la Base de Datos
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://' + bdIP + ':' + bdPort + '/GestionSalas', { useMongoClient: true })
-    //mongoose.connect('mongodb://'+user+':'+passwd+'@'+bdIP+':'+bdPort+'/'+bd+'',  { useMongoClient: true })
+mongoose.connect('mongodb://'+user+':'+passwd+'@'+bdIP+':'+bdPort+'/'+bd+'',  { useMongoClient: true })
     .then(() => {
         console.log("Correcto: La conexion a la base de datos RedSocial se ha realizado correctamente");
 

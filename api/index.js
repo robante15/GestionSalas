@@ -3,7 +3,7 @@
 //Importar el uso de Mongoose 
 var mongoose = require('mongoose');
 var app = require('./app');
-var ip = 'localhos'
+var ip = 'localhost'
 var port = '3800';
 var bdPort = '31070';
 var bdIP = 'ds231070.mlab.com';

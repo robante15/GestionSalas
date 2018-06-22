@@ -11,6 +11,7 @@ var app = express();
 var user_routes = require('./routes/usuario');
 var ubicacion_routes = require('./routes/ubicacion');
 var local_routes = require('./routes/local');
+var solicitud_routes = require('./routes/solicitud');
 
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 app.use('/api', user_routes);
 app.use('/api', ubicacion_routes);
 app.use('/api', local_routes)
+app.use('/api', solicitud_routes);
 
 //Exportar
 module.exports = app;

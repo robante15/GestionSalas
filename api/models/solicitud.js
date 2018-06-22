@@ -8,17 +8,16 @@ var SolicitudSchema = Schema({
         type: Schema.ObjectId,
         ref: 'Local'
     },
-    correlativo: Number,
+    correlativo: String,
     fecha_solicitud: String,
     nombre_actividad: String,
-    fecha_evento: String,
-    hora_inicio_evento: String,
-    hora_fin_evento: String,
-    numero_asistentes: Number,
+    inicio_evento: String,
+    fin_evento: String,
+    numero_asistentes: String,
     responsable_actividad: String,
     unidad_solicitante: String,
     jefe_unidad_solicitante: String,
-    aprovacion: Boolean,
+    aprovacion: String,
     administrador_sistema: {
         type: Schema.ObjectId,
         ref: 'Usuario'

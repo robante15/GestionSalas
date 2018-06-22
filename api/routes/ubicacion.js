@@ -10,7 +10,7 @@ var md_auth = require('../middlewares/authenticated');
 
 //Metodos GET
 api.get('/probando-ubicaciones', md_auth.ensuerAuth, UbicacionController.probando);
-api.get('/todasUbicaciones/:page?', md_auth.ensuerAuth, UbicacionController.obtenerUbicaciones);
+api.get('/todasUbicaciones/:pagina?', md_auth.ensuerAuth, UbicacionController.obtenerUbicaciones);
 api.get('/ubicacion/:id', md_auth.ensuerAuth, UbicacionController.obtenerUbicacion);
 /*api.get('/commentary-user/:user_id/:page?', md_auth.ensuerAuth, CommentaryController.getCommentaryUser);
 api.get('/commentary/:id', md_auth.ensuerAuth, CommentaryController.getCommentary);

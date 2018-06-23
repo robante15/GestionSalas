@@ -126,8 +126,57 @@ function obtenerDisponibilidadHoraFecha(req,res){
         .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' });    
 }
 
+//Obtener solicitudes aprobadas segun rango de tiempo
+function obtenerDisponibilidadHoraFechaAprobadas(req,res){
+    var params = req.body;
+    Solicitud.find(
+        {
+            fin_evento: { $gte: params.inicio_evento, $lte: params.fin_evento},
+            aprovacion: "true"
+        }, (err, solicitudes) => {
+            if (err) return res.status(500).send({
+                message: 'Error: Error en la peticion',
+                Error: err
+            });
 
-//Obtener solicitudes aprovadas
+            if (!solicitudes) return res.status(404).send({
+                message: 'Error: No hay solicitudes disponibles'
+            });
+
+            return res.status(200).send({
+                solicitudes
+            });
+        }
+    ).populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+        .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' });
+}
+
+//Obtener solicitudes aprobadas segun rango de tiempo
+function obtenerDisponibilidadHoraFechaPendientes(req, res) {
+    var params = req.body;
+    Solicitud.find(
+        {
+            fin_evento: { $gte: params.inicio_evento, $lte: params.fin_evento},
+            aprovacion: "pendiente"
+        }, (err, solicitudes) => {
+            if (err) return res.status(500).send({
+                message: 'Error: Error en la peticion',
+                Error: err
+            });
+
+            if (!solicitudes) return res.status(404).send({
+                message: 'Error: No hay solicitudes disponibles'
+            });
+
+            return res.status(200).send({
+                solicitudes
+            });
+        }
+    ).populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+        .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' });
+}
+
+//Obtener solicitudes aprobadas
 function obtenerSolicitudesAprovadas(req, res) {
     var pagina = 1;
     var items_por_pagina = 10;
@@ -188,7 +237,7 @@ function obtenerSolicitudesDenegadas(req, res) {
         });
 }
 
-//Obtener solicitudes rechazadas
+//Obtener solicitudes pendientes
 function obtenerSolicitudesPendientes(req, res) {
     var pagina = 1;
     var items_por_pagina = 10;
@@ -309,6 +358,8 @@ module.exports = {
     obtenerSolicitudes,
     obtenerSolicitudesCorrelativo,
     obtenerDisponibilidadHoraFecha,
+    obtenerDisponibilidadHoraFechaAprobadas,
+    obtenerDisponibilidadHoraFechaPendientes,
     obtenerSolicitudesID, 
     eliminarSolicitud,
     aprobarSolicitud,

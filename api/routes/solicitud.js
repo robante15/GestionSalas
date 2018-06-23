@@ -19,7 +19,8 @@ api.get('/obtener-solicitud-id/:id', md_auth.ensuerAuth, SolicitudController.obt
 //Metodos POST
 api.post('/nueva-solicitud', md_auth.ensuerAuth, SolicitudController.nuevaSolicitud);
 api.post('/obtener-solicitudes-ocupado/:pagina?', md_auth.ensuerAuth, SolicitudController.obtenerDisponibilidadHoraFecha);
-
+api.post('/obtener-solicitudes-ocupado-aprobadas/:pagina?', md_auth.ensuerAuth, SolicitudController.obtenerDisponibilidadHoraFechaAprobadas);
+api.post('/obtener-solicitudes-ocupado-pendientes/:pagina?', md_auth.ensuerAuth, SolicitudController.obtenerDisponibilidadHoraFechaPendientes);
 //Metodos DELETE
 api.delete('/solicitud-delete/:id', md_auth.ensuerAuth, SolicitudController.eliminarSolicitud);
 

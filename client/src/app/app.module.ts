@@ -19,7 +19,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     routing,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     appRoutingProviders

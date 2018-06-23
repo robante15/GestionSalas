@@ -1,32 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Usuario } from '../../models/usuario';
-//import { UserService } from '../../services/usuario.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
     selector: 'register',
-    templateUrl: './register.component.html'
+    templateUrl: './register.component.html',
+    providers: [UsuarioService]
 })
-export class RegisterComponent implements OnInit{
-    public title:string;
-    public usuario:Usuario;
-    public btn_registro:string;
 
+export class RegisterComponent implements OnInit {
+    title: string;
+    user: Usuario;
+    btn_registro: string;
+    status: string;
 
     constructor(
         private _route: ActivatedRoute,
-        private _router: Router
-    ){
-        this.title = 'Registro de Nuevo Usuario';
-        this.usuario = new Usuario("","","","","","","","","");
-        this.btn_registro = 'Agregar usuario';
+        private _router: Router,
+        private _usuarioService: UsuarioService
+    ) {
+        this.status = 'nada';
+        this.btn_registro = 'Registrarse'
+        this.title = 'Nuevo Registro';
+        this.user = new Usuario("",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "");
     }
 
-    ngOnInit(){
-        console.log('Componente de Registro Cargado');
+    ngOnInit() {
+        console.log('Correcto: Componente del registro cargado');
     }
 
-    onSubmit(form){
-        console.log(this.usuario);
+    onSubmit(form) {
+        this._usuarioService.registro(this.user).subscribe(
+            response => {
+                if (response.usuario && response.usuario._id) {
+                    //console.log(response.user);
+                    this.status = 'Correcto';
+                    form.reset();
+                } else {
+                    console.log(response);
+                    this.status = JSON.stringify(response);
+                }
+            },
+            error => {
+                console.log(<any>error);
+            }
+        );
     }
 }

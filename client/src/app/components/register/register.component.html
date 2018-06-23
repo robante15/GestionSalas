@@ -4,7 +4,7 @@
   <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-lg-10">
     <p>
       <label>Nombre</label>
-      <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="usuario.nombre" class="form-control" required />
+      <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="user.nombre" class="form-control" required />
       <span *ngIf="!nombre.valid && nombre.touched">
         El nombre es obligatorio
       </span>
@@ -12,7 +12,7 @@
 
     <p>
       <label>Apellido</label>
-      <input type="text" name="apellido" #apellido="ngModel" [(ngModel)]="usuario.apellido" class="form-control" required />
+      <input type="text" name="apellido" #apellido="ngModel" [(ngModel)]="user.apellido" class="form-control" required />
       <span *ngIf="!apellido.valid && apellido.touched">
         El apellido es obligatorio
       </span>
@@ -20,7 +20,7 @@
 
     <p>
       <label>Departamento o Sección</label>
-      <input type="text" name="departamento_seccion" #departamento_seccion="ngModel" [(ngModel)]="usuario.departamento_seccion"
+      <input type="text" name="departamento_seccion" #departamento_seccion="ngModel" [(ngModel)]="user.departamento_seccion"
         class="form-control" required />
       <span *ngIf="!departamento_seccion.valid && departamento_seccion.touched">
         La sección o departamiento es obligatorio
@@ -29,7 +29,7 @@
 
     <p>
       <label>Usuario</label>
-      <input type="text" name="usuario" #usuario="ngModel" [(ngModel)]="usuario.usuario" class="form-control" required />
+      <input type="text" name="usuario" #usuario="ngModel" [(ngModel)]="user.usuario" class="form-control" required />
       <span *ngIf="!usuario.valid && usuario.touched">
         El usuario es obligatorio
       </span>
@@ -37,7 +37,7 @@
 
     <p>
       <label>Correo</label>
-      <input type="text" name="email" #email="ngModel" [(ngModel)]="usuario.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       />
 
       <span *ngIf="!email.valid && email.touched">
@@ -47,7 +47,7 @@
 
     <p>
       <label>Contraseña</label>
-      <input type="password" name="contrasena" #contrasena="ngModel" [(ngModel)]="usuario.contrasena" class="form-control" required
+      <input type="password" name="contrasena" #contrasena="ngModel" [(ngModel)]="user.contrasena" class="form-control" required
         pattern="[A-Za-z0-9]+" />
 
       <span *ngIf="!contrasena.valid && contrasena.touched">

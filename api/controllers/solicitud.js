@@ -104,32 +104,12 @@ function obtenerSolicitudes(req, res) {
 
 //Obtener disponibilidad de horarios
 function obtenerDisponibilidadHoraFecha(req,res){
- 
-    
+    var params = req.body;
+    console.log(params)
+    console.log(req.body)
     Solicitud.find(
         {
-            $or:[
-                {
-                    $and:[
-                        {
-                            inicio_evento:{$gt: req.params.inicio_evento}
-                        },
-                        {
-                            inicio_evento: { $lt: req.params.fin_evento}
-                        }
-                    ]
-                },
-                {
-                    $and: [
-                        {
-                            fin_evento: { $gt: req.params.inicio_evento }
-                        },
-                        {
-                            fin_evento: { $lt: req.params.fin_evento }
-                        }
-                    ]
-                }
-            ]
+            fin_evento: { $gte: params.inicio_evento, $lte: params.fin_evento } 
         }, (err, solicitud) => {
             if (err) return res.status(500).send({
                 message: 'Error: Error en la peticion',

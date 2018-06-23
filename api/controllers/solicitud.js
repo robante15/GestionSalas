@@ -37,7 +37,7 @@ function nuevaSolicitud(req, res) {
     solicitud.rasponsable_actividad = params.rasponsable_actividad;
     solicitud.unidad_solicitante = params.unidad_solicitante;
     solicitud.jefe_unidad_solicitante = params.jefe_unidad_solicitante;
-    solicitud.aprovacion = 'false';
+    solicitud.aprovacion = 'pendiente';
     solicitud.administrador_sistema = req.user.sub;
 
     Solicitud.find({ correlativo: solicitud.correlativo }).exec((err, solicitudes) => {
@@ -102,6 +102,99 @@ function obtenerSolicitudes(req, res) {
         });
 }
 
+//Obtener solicitudes aprovadas
+function obtenerSolicitudesAprovadas(req, res) {
+    var pagina = 1;
+    var items_por_pagina = 10;
+
+    if (req.params.pagina) {
+        pagina = req.params.pagina;
+    }
+
+    Solicitud.find({aprovacion : 'true'}).sort('correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+        .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' })
+        .paginate(pagina, items_por_pagina, (err, solicitudes, total) => {
+            if (err) return res.status(500).send({
+                message: 'Error: Error en la peticion',
+                Error: err
+            });
+
+            if (!solicitudes) return res.status(404).send({
+                message: 'Error: No hay solicitudes disponibles'
+            });
+
+            return res.status(200).send({
+                total_items: total,
+                paginas: Math.ceil(total / items_por_pagina),
+                pagina: pagina,
+                items_por_pagina: items_por_pagina,
+                solicitudes
+            })
+        });
+}
+
+//Obtener solicitudes rechazadas
+function obtenerSolicitudesDenegadas(req, res) {
+    var pagina = 1;
+    var items_por_pagina = 10;
+
+    if (req.params.pagina) {
+        pagina = req.params.pagina;
+    }
+
+    Solicitud.find({aprovacion : 'false'}).sort('correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+        .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' })
+        .paginate(pagina, items_por_pagina, (err, solicitudes, total) => {
+            if (err) return res.status(500).send({
+                message: 'Error: Error en la peticion',
+                Error: err
+            });
+
+            if (!solicitudes) return res.status(404).send({
+                message: 'Error: No hay solicitudes disponibles'
+            });
+
+            return res.status(200).send({
+                total_items: total,
+                paginas: Math.ceil(total / items_por_pagina),
+                pagina: pagina,
+                items_por_pagina: items_por_pagina,
+                solicitudes
+            })
+        });
+}
+
+//Obtener solicitudes rechazadas
+function obtenerSolicitudesPendientes(req, res) {
+    var pagina = 1;
+    var items_por_pagina = 10;
+
+    if (req.params.pagina) {
+        pagina = req.params.pagina;
+    }
+
+    Solicitud.find({aprovacion : 'pendiente'}).sort('correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+        .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' })
+        .paginate(pagina, items_por_pagina, (err, solicitudes, total) => {
+            if (err) return res.status(500).send({
+                message: 'Error: Error en la peticion',
+                Error: err
+            });
+
+            if (!solicitudes) return res.status(404).send({
+                message: 'Error: No hay solicitudes disponibles'
+            });
+
+            return res.status(200).send({
+                total_items: total,
+                paginas: Math.ceil(total / items_por_pagina),
+                pagina: pagina,
+                items_por_pagina: items_por_pagina,
+                solicitudes
+            })
+        });
+}
+
 //Obtener solicitudes segun correlativo
 function obtenerSolicitudesCorrelativo(req, res) {
     Solicitud.findOne({
@@ -123,6 +216,7 @@ function obtenerSolicitudesCorrelativo(req, res) {
     }).populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
         .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' });
 }
+
 
 //Obtener solicitudes segun ID
 function obtenerSolicitudesID(req, res) {
@@ -162,6 +256,7 @@ function eliminarSolicitud(req, res) {
     });
 }
 
+//Aprueba una solicitud segun ID
 function aprobarSolicitud(req, res){
     var solicitudID = req.params.id;
 
@@ -191,5 +286,8 @@ module.exports = {
     obtenerSolicitudesCorrelativo,
     obtenerSolicitudesID, 
     eliminarSolicitud,
-    aprobarSolicitud
+    aprobarSolicitud,
+    obtenerSolicitudesAprovadas,
+    obtenerSolicitudesDenegadas,
+    obtenerSolicitudesPendientes
 }

@@ -12,9 +12,9 @@ var HorarioSchema = Schema({
         type: Schema.ObjectId,
         ref: 'Solicitud'
     },
-    fecha: String,
-    hora_inicio: String,
-    hora_final: String
+    fecha: Number,
+    hora_inicio: Number,
+    hora_final: Number
 });
 
 module.exports = mongoose.model('Horario', HorarioSchema);

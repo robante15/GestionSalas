@@ -1,6 +1,15 @@
 <div class="col-lg-6">
   <h1>{{title}}</h1>
 
+  <div class="alert alert-success" *ngIf="status == 'Correcto'">
+    Registro completado correctamente
+    <a [routerLink]="['/login']">Identificate aqui</a>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="status != 'nada' && status != 'Correcto'">
+    {{status}}
+  </div>
+
   <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-lg-10">
     <p>
       <label>Nombre</label>
@@ -20,8 +29,8 @@
 
     <p>
       <label>Departamento o Sección</label>
-      <input type="text" name="departamento_seccion" #departamento_seccion="ngModel" [(ngModel)]="user.departamento_seccion"
-        class="form-control" required />
+      <input type="text" name="departamento_seccion" #departamento_seccion="ngModel" [(ngModel)]="user.departamento_seccion" class="form-control"
+        required />
       <span *ngIf="!departamento_seccion.valid && departamento_seccion.touched">
         La sección o departamiento es obligatorio
       </span>

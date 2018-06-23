@@ -5,9 +5,9 @@
         <a href="#" class="navbar-brand">{{title}}</a>
       </div>
 
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" *ngIf="identity">
         <li>
-          <a href="#">
+          <a href="/home">
             <span class="glyphicon glyphicon-home"></span>
             Inicio
           </a>
@@ -28,7 +28,68 @@
         </li>
       </ul>
 
+      <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
 
+        <li>
+          <a [routerLink]="['/login']" [routerLinkActive]="['active']">
+            <span class="glyphicon glyphicon-log-in"></span>
+            Iniciar Sesion
+          </a>
+        </li>
+
+        <li>
+          <a [routerLink]="['/registro']" [routerLinkActive]="['active']">
+            <span class="glyphicon glyphicon-user"></span>
+            Registrarse
+          </a>
+        </li>
+      </ul>
+
+
+      <ul class="nav navbar-nav navbar-right" *ngIf="identity">
+
+        <li class="avatar">
+          <!--Cargar imagen de usuario-->
+          <img src="{{url + 'get-image-user/' + identity.image}}" *ngIf="identity && identity.image" />
+        </li>
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            {{identity.nombre}} {{identity.apellido}}
+            <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a [routerLink]="['/perfil/'+identity._id]" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-user"></span>
+                Ver Perfil
+              </a>
+            </li>
+
+            <li>
+              <a [routerLink]="['/mis-datos']" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-cog"></span>
+                Modificar perfil
+              </a>
+            </li>
+
+            <li>
+              <a [routerLink]="['/sugerencias']" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-inbox"></span>
+                Enviar Sugerencia
+              </a>
+            </li>
+
+            <li>
+              <a class="pointer" (click)="logout()">
+                <span class="glyphicon glyphicon-log-out"></span>
+                Cerrar Sesion
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
 
     </div>
   </nav>

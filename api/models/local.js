@@ -10,9 +10,9 @@ var LocalSchema = Schema({
         ref: 'Ubicacion'
     },
     text: String,
-    capacidad: String,
+    capacidad: Number,
     file: String,
-    created_at: String
+    created_at: Number
 });
 
 module.exports = mongoose.model('Local', LocalSchema);

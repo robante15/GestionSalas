@@ -15,10 +15,10 @@ api.get('/obtener-solicitudes-denegadas/:pagina?', md_auth.ensuerAuth, Solicitud
 api.get('/obtener-solicitudes-pendientes/:pagina?', md_auth.ensuerAuth, SolicitudController.obtenerSolicitudesPendientes);
 api.get('/obtener-solicitud-correlativo/:correlativo', md_auth.ensuerAuth, SolicitudController.obtenerSolicitudesCorrelativo);
 api.get('/obtener-solicitud-id/:id', md_auth.ensuerAuth, SolicitudController.obtenerSolicitudesID);
-api.get('/obtener-solicitudes-ocupado/:pagina?', md_auth.ensuerAuth, SolicitudController.obtenerDisponibilidadHoraFecha);
 
 //Metodos POST
 api.post('/nueva-solicitud', md_auth.ensuerAuth, SolicitudController.nuevaSolicitud);
+api.post('/obtener-solicitudes-ocupado/:pagina?', md_auth.ensuerAuth, SolicitudController.obtenerDisponibilidadHoraFecha);
 
 //Metodos DELETE
 api.delete('/solicitud-delete/:id', md_auth.ensuerAuth, SolicitudController.eliminarSolicitud);

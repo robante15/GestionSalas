@@ -105,12 +105,10 @@ function obtenerSolicitudes(req, res) {
 //Obtener disponibilidad de horarios
 function obtenerDisponibilidadHoraFecha(req,res){
     var params = req.body;
-    console.log(params)
-    console.log(req.body)
     Solicitud.find(
         {
             fin_evento: { $gte: params.inicio_evento, $lte: params.fin_evento } 
-        }, (err, solicitud) => {
+        }, (err, solicitudes) => {
             if (err) return res.status(500).send({
                 message: 'Error: Error en la peticion',
                 Error: err
@@ -121,7 +119,7 @@ function obtenerDisponibilidadHoraFecha(req,res){
             });
 
             return res.status(200).send({
-                solicitud
+                solicitudes
             });
         }
     ).populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })

@@ -102,6 +102,54 @@ function obtenerSolicitudes(req, res) {
         });
 }
 
+//Obtener disponibilidad de horarios
+function obtenerDisponibilidadHoraFecha(req,res){
+ 
+    
+    Solicitud.find(
+        {
+            $or:[
+                {
+                    $and:[
+                        {
+                            inicio_evento:{$gt: req.params.inicio_evento}
+                        },
+                        {
+                            inicio_evento: { $lt: req.params.fin_evento}
+                        }
+                    ]
+                },
+                {
+                    $and: [
+                        {
+                            fin_evento: { $gt: req.params.inicio_evento }
+                        },
+                        {
+                            fin_evento: { $lt: req.params.fin_evento }
+                        }
+                    ]
+                }
+            ]
+        }, (err, solicitud) => {
+            if (err) return res.status(500).send({
+                message: 'Error: Error en la peticion',
+                Error: err
+            });
+
+            if (!solicitud) return res.status(404).send({
+                message: 'Error: No hay solicitudes disponibles'
+            });
+
+            return res.status(200).send({
+                solicitud
+            });
+
+        }
+    ).populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+        .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' });
+
+}
+
 //Obtener solicitudes segun correlativo
 function obtenerSolicitudesCorrelativo(req, res) {
     Solicitud.findOne({
@@ -189,6 +237,7 @@ module.exports = {
     nuevaSolicitud,
     obtenerSolicitudes,
     obtenerSolicitudesCorrelativo,
+    obtenerDisponibilidadHoraFecha,
     obtenerSolicitudesID, 
     eliminarSolicitud,
     aprobarSolicitud

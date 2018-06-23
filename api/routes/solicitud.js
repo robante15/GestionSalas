@@ -12,6 +12,7 @@ api.get('/probando-solicitudes', md_auth.ensuerAuth, SolicitudController.proband
 api.get('/obtener-solicitudes/:pagina?', md_auth.ensuerAuth, SolicitudController.obtenerSolicitudes);
 api.get('/obtener-solicitud-correlativo/:correlativo', md_auth.ensuerAuth, SolicitudController.obtenerSolicitudesCorrelativo);
 api.get('/obtener-solicitud-id/:id', md_auth.ensuerAuth, SolicitudController.obtenerSolicitudesID);
+api.get('/obtener-solicitudes-ocupado/:pagina?', md_auth.ensuerAuth, SolicitudController.obtenerDisponibilidadHoraFecha);
 
 //Metodos POST
 api.post('/nueva-solicitud', md_auth.ensuerAuth, SolicitudController.nuevaSolicitud);

@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
-
+import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
+import { Moment } from 'moment';
 
 //Cargar componentes
 import { LoginComponent } from './components/login/login.component';
@@ -24,7 +25,8 @@ import { nuevaSolicitudComponent } from './components/nuevaSolicitud/nuevaSolici
     BrowserModule,
     routing,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DlDateTimePickerDateModule
   ],
   providers: [
     appRoutingProviders

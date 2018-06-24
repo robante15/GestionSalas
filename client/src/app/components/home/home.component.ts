@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
     constructor(
         private _userService: UsuarioService,
     ) {
-        this.title = "Bienvenido a NUV Social Club";
+        this.title = "Sistema de Gestión de Salas UES-FMO";
         this.user = null;
     }
 

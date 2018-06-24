@@ -23,6 +23,7 @@ export class nuevaSolicitudComponent implements OnInit {
     public token;
     public identity;
     public locales: Local[];
+    public listaLocales;
     public solicitudOBJ: Solicitud;
 
     constructor(
@@ -43,25 +44,18 @@ export class nuevaSolicitudComponent implements OnInit {
 
     ngOnInit() {
         this.identity = this._usuarioService.getIdentity();
-        console.log('Se ha inicializado el componente NuevaSolicitud');
         this.obtenerLocales(1);
+        console.log('Se ha inicializado el componente NuevaSolicitud');
     }
 
-
     obtenerLocales(page) {
-        this._localService.obtenerLocales(this.token, page).subscribe(response => {
-            if (response.locales) {
-                this.locales = response.locales;
-            } else {
-                this.status = 'Error';
+        this._localService.obtenerLocales(this.token, page).subscribe(
+            response => {
+                this.listaLocales = response.locales;
+                console.log(this.listaLocales);
+            }, error => {
+                console.log(<any>error);
             }
-        }, error => {
-            var errorMessage = <any>error;
-            console.log(errorMessage);
-            if (errorMessage != null) {
-                this.status = 'Error';
-            }
-        }
         );
     }
 

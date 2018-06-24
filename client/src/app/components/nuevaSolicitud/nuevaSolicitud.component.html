@@ -1,4 +1,4 @@
-<div class="col-lg-6">
+<div class="col-lg-6 container">
   <h1>{{title}}</h1>
 
   <div class="alert alert-success" *ngIf="status == 'Correcto'">
@@ -28,6 +28,14 @@
     </p>
 
     <p>
+      <label>Local</label>
+      <!--Listado de locales -->
+      <select *ngIf="listaLocales" name="locales" #locales="ngModel" [(ngModel)]="solicitudOBJ.localID" class="form-control" required>
+        <option *ngFor="let listaLocal of listaLocales" value="{{listaLocal._id}}">{{listaLocal.nombre}}</option>
+      </select>
+    </p>
+
+    <p>
       <label>Nombre de la actividad o evento</label>
       <input type="text" name="nombre_actividad" #nombre_actividad="ngModel" [(ngModel)]="solicitudOBJ.nombre_actividad" class="form-control"
         required />
@@ -38,6 +46,7 @@
 
     <p>
       <label>Fecha y Hora de Inicio</label>
+      <button data-toggle="collapse" data-target="#selectorInicio" class="mx-3 btn btn-success btn-sm">Seleccionar</button>
       <input type="text" name="inicio_evento" #inicio_evento="ngModel" [(ngModel)]="solicitudOBJ.inicio_evento" class="form-control"
         required />
       <span *ngIf="!inicio_evento.valid && inicio_evento.touched">
@@ -45,14 +54,29 @@
       </span>
     </p>
 
+    <div id="selectorInicio" class="collapse">
+      <div class="col-lg-6">
+        <dl-date-time-picker name="inicio_evento" #inicio_evento="ngModel" [(ngModel)]="solicitudOBJ.inicio_evento"></dl-date-time-picker>
+      </div>
+    </div>
+
     <p>
       <label>Fecha y Hora de Fin</label>
+      <button data-toggle="collapse" data-target="#selectorFinal" class="mx-3 btn btn-success btn-sm">Seleccionar</button>
       <input type="text" name="fin_evento" #fin_evento="ngModel" [(ngModel)]="solicitudOBJ.fin_evento" class="form-control" required
       />
       <span *ngIf="!fin_evento.valid && fin_evento.touched">
         Debe de ingresar una fecha y hora de la finalización del evento
       </span>
     </p>
+
+
+    <div id="selectorFinal" class="collapse">
+      <div class="col-lg-6">
+        <dl-date-time-picker name="fin_evento" #inicio_evento="ngModel" [(ngModel)]="solicitudOBJ.fin_evento"></dl-date-time-picker>
+      </div>
+    </div>
+
 
     <p>
       <label>Numero de asistentes</label>
@@ -93,4 +117,5 @@
     <input type="submit" value="{{btn_solicitud}}" class="btn btn-success" [disabled]="!solicitudForm.form.valid" />
 
   </form>
+
 </div>

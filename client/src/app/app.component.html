@@ -1,144 +1,77 @@
-<div class="navigation col-lg-12">
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a href="#" class="navbar-brand">{{title}}</a>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">{{title}}</a>
 
-      <ul class="nav navbar-nav" *ngIf="identity">
-        <li>
-          <a href="/home">
-            <span class="glyphicon glyphicon-home"></span>
-            Inicio
-          </a>
-        </li>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="glyphicon glyphicon glyphicon-list-alt"></span>
-            Solicitudes
-            <span class="caret"></span>
-          </a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
+    <ul class="navbar-nav mr-auto" *ngIf="identity">
 
-          <ul class="dropdown-menu">
+      <li class="nav-item">
+        <a class="nav-link" href="/home">
+          Inicio
+        </a>
+      </li>
 
-            <li>
-              <a [routerLink]="['/nuevaSolicitud']" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-plus"></span>
-                Nueva Solicitud
-              </a>
-            </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          Solicitudes
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/nuevaSolicitud']" [routerLinkActive]="['active']">Nueva Solicitud</a>
+          <a class="dropdown-item" href="#">Ver Solicitudes</a>
+          <a class="dropdown-item" href="#">Solicitudes Pendientes</a>
+          <a class="dropdown-item" href="#">Solicitudes Aprovadas</a>
+          <a class="dropdown-item" href="#">Solicitudes Denegadas</a>
+        </div>
+      </li>
 
-            <li>
-              <a [routerLink]="['/perfil/'+identity._id]" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-search"></span>
-                Ver Solicitudes
-              </a>
-            </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/home">
+          Horarios
+        </a>
+      </li>
 
-            <li>
-              <a [routerLink]="['/mis-datos']" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-inbox"></span>
-                Solicitudes Pendientes
-              </a>
-            </li>
-
-            <li>
-              <a [routerLink]="['/sugerencias']" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-ok"></span>
-                Solicitudes Aprovadas
-              </a>
-            </li>
-
-            <li>
-              <a [routerLink]="['/sugerencias']" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-remove"></span>
-                Solicitudes Denegadas
-              </a>
-            </li>
-
-          </ul>
-        </li>
-
-        <li>
-          <a href="#">
-            <span class="glyphicon glyphicon-time"></span>
-            Horarios
-          </a>
-        </li>
-      </ul>
+    </ul>
 
 
+    <ul class="nav navbar-nav ml-auto" *ngIf="!identity">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="['active']">
+          Iniciar Sesion
+        </a>
+      </li>
 
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/registro']" [routerLinkActive]="['active']">
+          Registrarse
+        </a>
+      </li>
+    </ul>
 
-      <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
-
-        <li>
-          <a [routerLink]="['/login']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-log-in"></span>
-            Iniciar Sesion
-          </a>
-        </li>
-
-        <li>
-          <a [routerLink]="['/registro']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-user"></span>
-            Registrarse
-          </a>
-        </li>
-      </ul>
+    <ul class="nav navbar-nav ml-auto" *ngIf="identity">
+      <li class="nav-item dropdown dropleft">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{identity.nombre}} {{identity.apellido}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/nuevaSolicitud']" [routerLinkActive]="['active']">Nueva Solicitud</a>
+          <a class="dropdown-item" href="#">Ver Perfil</a>
+          <a class="dropdown-item" href="#">Modificar Perfil</a>
+          <a class="dropdown-item" href="#">Enviar Sugerencia</a>
+          <a class="dropdown-item" href="#">Cerrar Sesión</a>
+        </div>
+      </li>
+    </ul>
 
 
 
-
-      <ul class="nav navbar-nav navbar-right" *ngIf="identity">
-
-        <li class="avatar">
-          <!--Cargar imagen de usuario-->
-          <img src="{{url + 'get-image-user/' + identity.image}}" *ngIf="identity && identity.image" />
-        </li>
-
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            {{identity.nombre}} {{identity.apellido}}
-            <span class="caret"></span>
-          </a>
-
-          <ul class="dropdown-menu">
-            <li>
-              <a [routerLink]="['/perfil/'+identity._id]" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-user"></span>
-                Ver Perfil
-              </a>
-            </li>
-
-            <li>
-              <a [routerLink]="['/mis-datos']" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-cog"></span>
-                Modificar perfil
-              </a>
-            </li>
-
-            <li>
-              <a [routerLink]="['/sugerencias']" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-inbox"></span>
-                Enviar Sugerencia
-              </a>
-            </li>
-
-            <li>
-              <a class="pointer" (click)="logout()">
-                <span class="glyphicon glyphicon-log-out"></span>
-                Cerrar Sesion
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-
-    </div>
-  </nav>
-</div>
+  </div>
+</nav>
 
 <router-outlet></router-outlet>

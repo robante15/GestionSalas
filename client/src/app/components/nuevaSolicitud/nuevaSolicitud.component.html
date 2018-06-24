@@ -21,14 +21,6 @@
 
     <p>
       <label>Local</label>
-      <input type="text" name="local" #local="ngModel" [(ngModel)]="solicitudOBJ.localID" class="form-control" required />
-      <span *ngIf="!local.valid && local.touched">
-        El local obligatorio
-      </span>
-    </p>
-
-    <p>
-      <label>Local</label>
       <!--Listado de locales -->
       <select *ngIf="listaLocales" name="locales" #locales="ngModel" [(ngModel)]="solicitudOBJ.localID" class="form-control" required>
         <option *ngFor="let listaLocal of listaLocales" value="{{listaLocal._id}}">{{listaLocal.nombre}}</option>

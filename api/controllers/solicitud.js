@@ -37,7 +37,7 @@ function nuevaSolicitud(req, res) {
     solicitud.responsable_actividad = params.responsable_actividad;
     solicitud.unidad_solicitante = params.unidad_solicitante;
     solicitud.jefe_unidad_solicitante = params.jefe_unidad_solicitante;
-    solicitud.aprovacion = 'pendiente';
+    solicitud.aprovacion = 'Pendiente';
     solicitud.administrador_sistema = req.user.sub;
 
     Solicitud.find({ correlativo: solicitud.correlativo }).exec((err, solicitudes) => {
@@ -185,7 +185,7 @@ function obtenerSolicitudesAprovadas(req, res) {
         pagina = req.params.pagina;
     }
 
-    Solicitud.find({aprovacion : 'true'}).sort('correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+    Solicitud.find({aprovacion : 'Aprovado'}).sort('-correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
         .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' })
         .paginate(pagina, items_por_pagina, (err, solicitudes, total) => {
             if (err) return res.status(500).send({
@@ -198,15 +198,17 @@ function obtenerSolicitudesAprovadas(req, res) {
             });
 
             return res.status(200).send({
-                solicitud
-            });
+                total_items: total,
+                paginas: Math.ceil(total / items_por_pagina),
+                pagina: pagina,
+                items_por_pagina: items_por_pagina,
+                solicitudes
+            })
 
-        }
-    ).populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
-        .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' });
+        });
 }
 
-//Obtener solicitudes rechazadas
+//Obtener solicitudes aprobadas
 function obtenerSolicitudesDenegadas(req, res) {
     var pagina = 1;
     var items_por_pagina = 10;
@@ -215,7 +217,7 @@ function obtenerSolicitudesDenegadas(req, res) {
         pagina = req.params.pagina;
     }
 
-    Solicitud.find({aprovacion : 'false'}).sort('correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+    Solicitud.find({aprovacion : 'Denegado'}).sort('-correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
         .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' })
         .paginate(pagina, items_por_pagina, (err, solicitudes, total) => {
             if (err) return res.status(500).send({
@@ -234,10 +236,11 @@ function obtenerSolicitudesDenegadas(req, res) {
                 items_por_pagina: items_por_pagina,
                 solicitudes
             })
+
         });
 }
 
-//Obtener solicitudes pendientes
+//Obtener solicitudes aprobadas
 function obtenerSolicitudesPendientes(req, res) {
     var pagina = 1;
     var items_por_pagina = 10;
@@ -246,7 +249,7 @@ function obtenerSolicitudesPendientes(req, res) {
         pagina = req.params.pagina;
     }
 
-    Solicitud.find({aprovacion : 'pendiente'}).sort('correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+    Solicitud.find({aprovacion : 'Pendiente'}).sort('-correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
         .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' })
         .paginate(pagina, items_por_pagina, (err, solicitudes, total) => {
             if (err) return res.status(500).send({
@@ -265,6 +268,7 @@ function obtenerSolicitudesPendientes(req, res) {
                 items_por_pagina: items_por_pagina,
                 solicitudes
             })
+
         });
 }
 

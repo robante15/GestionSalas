@@ -28,7 +28,27 @@ export class SolicitudService {
             .set('Authorization', token);
 
         return this._http.get(this.URL + 'obtener-solicitudes/' + page, { headers: headers });
+    }
 
+    obtenerSolicitudesAprovadas(token, page = 1): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
+        return this._http.get(this.URL + 'obtener-solicitudes-aprovadas/' + page, { headers: headers });
+    }
+
+    obtenerSolicitudesPendientes(token, page = 1): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
+        return this._http.get(this.URL + 'obtener-solicitudes-pendientes/' + page, { headers: headers });
+    }
+
+    obtenerSolicitudesDenegadas(token, page = 1): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
+        return this._http.get(this.URL + 'obtener-solicitudes-denegadas/' + page, { headers: headers });
     }
 
 }

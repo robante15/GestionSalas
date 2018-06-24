@@ -31,6 +31,7 @@ export class verSolicitudesComponent implements OnInit {
     public token;
     public URL: string;
     public status: string;
+    public selector: string;
 
     constructor(
         private _route: ActivatedRoute,
@@ -40,6 +41,7 @@ export class verSolicitudesComponent implements OnInit {
         private _solicitudService: SolicitudService
     ) {
         this.title = 'Solicitudes de Espacios';
+        this.selector = 'Todas';
         this.identity = this._usuarioService.getIdentity();
         this.token = this._usuarioService.getToken();
         this.URL = GLOBAL.url;
@@ -53,7 +55,127 @@ export class verSolicitudesComponent implements OnInit {
     }
 
     obtenerSolicitudes(pagina, adding = false) {
+        if (this.selector != 'Todas') {
+            this.solicitudes = [];
+            this.selector = 'Todas'
+        }
+
         this._solicitudService.obtenerSolicitudes(this.token, pagina).subscribe(
+            response => {
+                if (response.solicitudes) {
+                    this.total = response.total_items;
+                    this.paginas = response.paginas;
+                    this.items_por_pagina = response.items_por_pagina;
+                    if (!adding) {
+                        this.solicitudes = response.solicitudes;
+                    } else {
+                        var arrayA = this.solicitudes;
+                        var arrayB = response.solicitudes;
+                        this.solicitudes = arrayA.concat(arrayB);
+
+                        $("html, body").animate({ scrollTop: $('body').prop("scrollHeight") }, 500);
+
+                    }
+
+                    if (pagina > this.paginas) {
+                        this._router.navigate(['/verSolicitudes']);
+                    }
+                } else {
+                    this.status = 'Error';
+                }
+            }, error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+                if (errorMessage != null) {
+                    this.status = 'Error';
+                }
+            }
+        );
+    }
+
+    obtenerSolicitudesPendientes(pagina, adding = false) {
+        if (this.selector != 'Pendiente') {
+            this.solicitudes = [];
+            this.selector = 'Pendiente'
+        }
+
+        this._solicitudService.obtenerSolicitudesPendientes(this.token, pagina).subscribe(
+            response => {
+                if (response.solicitudes) {
+                    this.total = response.total_items;
+                    this.paginas = response.paginas;
+                    this.items_por_pagina = response.items_por_pagina;
+                    if (!adding) {
+                        this.solicitudes = response.solicitudes;
+                    } else {
+                        var arrayA = this.solicitudes;
+                        var arrayB = response.solicitudes;
+                        this.solicitudes = arrayA.concat(arrayB);
+
+                        $("html, body").animate({ scrollTop: $('body').prop("scrollHeight") }, 500);
+
+                    }
+
+                    if (pagina > this.paginas) {
+                        this._router.navigate(['/verSolicitudes']);
+                    }
+                } else {
+                    this.status = 'Error';
+                }
+            }, error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+                if (errorMessage != null) {
+                    this.status = 'Error';
+                }
+            }
+        );
+    }
+
+    obtenerSolicitudesAprobadas(pagina, adding = false) {
+        if (this.selector != 'Aprobadas') {
+            this.solicitudes = [];
+            this.selector = 'Pendiente'
+        }
+        this._solicitudService.obtenerSolicitudesAprovadas(this.token, pagina).subscribe(
+            response => {
+                if (response.solicitudes) {
+                    this.total = response.total_items;
+                    this.paginas = response.paginas;
+                    this.items_por_pagina = response.items_por_pagina;
+                    if (!adding) {
+                        this.solicitudes = response.solicitudes;
+                    } else {
+                        var arrayA = this.solicitudes;
+                        var arrayB = response.solicitudes;
+                        this.solicitudes = arrayA.concat(arrayB);
+
+                        $("html, body").animate({ scrollTop: $('body').prop("scrollHeight") }, 500);
+
+                    }
+
+                    if (pagina > this.paginas) {
+                        this._router.navigate(['/verSolicitudes']);
+                    }
+                } else {
+                    this.status = 'Error';
+                }
+            }, error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+                if (errorMessage != null) {
+                    this.status = 'Error';
+                }
+            }
+        );
+    }
+
+    obtenerSolicitudesDenegadas(pagina, adding = false) {
+        if (this.selector != 'Denegadas') {
+            this.solicitudes = [];
+            this.selector = 'Denegadas'
+        }
+        this._solicitudService.obtenerSolicitudesDenegadas(this.token, pagina).subscribe(
             response => {
                 if (response.solicitudes) {
                     this.total = response.total_items;

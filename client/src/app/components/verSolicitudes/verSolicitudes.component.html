@@ -16,17 +16,10 @@
   <div class="card-body">
 
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-secondary active">
-        <input type="radio" name="options" id="option1" autocomplete="off" checked> Solicitudes Pendientes
-      </label>
-      <label class="btn btn-success">
-        <input type="radio" name="options" id="option2" autocomplete="off"> Solicitudes Aprovadas
-      </label>
-      <label class="btn btn-danger">
-        <input type="radio" name="options" id="option3" autocomplete="off"> Solicitudes Denegadas
-      </label>
-
-
+            <button class="btn btn-secondary" (click)="obtenerSolicitudesPendientes()" *ngIf="!noMore"> Solicitudes pendientes</button>
+            <button class="btn btn-success" (click)="obtenerSolicitudesAprobadas()" *ngIf="!noMore"> Solicitudes pendientes</button>
+            <button class="btn btn-danger" (click)="obtenerSolicitudesDenegadas()" *ngIf="!noMore"> Solicitudes pendientes</button>
+     
       <form class="form-inline my-2 my-lg-0 ml-5">
         <input class="form-control mr-sm-2" type="search" placeholder="Correlativo" aria-label="Buscar">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
@@ -54,7 +47,7 @@
           <p class="card-text"><b>Unidad o Sección que lo Solicita:</b> {{solicitudList.unidad_solicitante}}</p>
           <p class="card-text"><b>Jefe de la Unidad o Sección que lo Solicita:</b> {{solicitudList.jefe_unidad_solicitante}}</p>
           <p class="card-text"><b>Status:</b> {{solicitudList.aprovacion}}</p>
-          <a href="#" class="btn btn-success mx-2" *ngIf="solicitudList.aprovacion == 'pendiente'">Aprovar</a>
+          <a href="#" class="btn btn-success mx-2" *ngIf="solicitudList.aprovacion == 'pendiente'">Aprobar</a>
           <a href="#" class="btn btn-danger mx-2" *ngIf="solicitudList.aprovacion == 'pendiente'">Denegar</a>
         </div>
       </div>
@@ -68,5 +61,6 @@
     <button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
       Cargar más solicitudes
     </button>
+
   </p>
 </div>

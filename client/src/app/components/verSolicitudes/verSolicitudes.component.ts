@@ -32,6 +32,7 @@ export class verSolicitudesComponent implements OnInit {
     public URL: string;
     public status: string;
     public selector: string;
+    public search: string;
 
     constructor(
         private _route: ActivatedRoute,
@@ -57,16 +58,52 @@ export class verSolicitudesComponent implements OnInit {
     aprobarSolicitud(id) {
         this._solicitudService.aprovarSolicitud(this.token, id).subscribe(
             response => {
-                if (!response.solicitud) {
+                if (!response.solicitudActualizada) {
                     this.status = 'Error';
                 } else {
                     this.status = 'Correcto';
+                    this.refresh();
                 }
             },
             error => {
                 var errorMessage = <any>error;
                 console.log(errorMessage);
 
+                if (errorMessage != null) {
+                    this.status = 'Error';
+                }
+            }
+        );
+    }
+
+    denegarSolicitud(id) {
+        this._solicitudService.denegarSolicitud(this.token, id).subscribe(
+            response => {
+                if (!response.solicitudActualizada) {
+                    this.status = 'Error';
+                } else {
+                    this.status = 'Correcto';
+                    this.refresh();
+                }
+            },
+            error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if (errorMessage != null) {
+                    this.status = 'Error';
+                }
+            }
+        );
+    }
+
+    eliminarSolicitud(id) {
+        this._solicitudService.eliminarSolicitud(this.token, id).subscribe(
+            response => {
+                this.refresh();
+            }, error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
                 if (errorMessage != null) {
                     this.status = 'Error';
                 }
@@ -111,6 +148,31 @@ export class verSolicitudesComponent implements OnInit {
                 }
             }
         );
+    }
+
+    obtenerSolicitudCorrelativo(correlativo: Number) {
+        if (correlativo) {
+            this._solicitudService.obtenerSolicitudCorrelativo(this.token, correlativo).subscribe(
+                response => {
+                    console.log(response);
+                    if (response.solicitud) {
+                        this.solicitudes = [];
+                        var arrayB = response.solicitud;
+                        this.solicitudes = this.solicitudes.concat(arrayB);
+                    } else {
+                        this.status = 'Error';
+                    }
+                }, error => {
+                    var errorMessage = <any>error;
+                    console.log(errorMessage);
+                    if (errorMessage != null) {
+                        this.status = 'Error';
+                    }
+                }
+            );
+        }else{
+            this.refresh();
+        }
     }
 
     obtenerSolicitudesPendientes(pagina, adding = false) {

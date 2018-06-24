@@ -12,43 +12,60 @@
     </div>
   </div>
 
-<div class="card">
-  <div class="card-body">
+  <div class="card">
+    <div class="card-body">
 
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <button class="btn btn-secondary" (click)="obtenerSolicitudesPendientes()"> Solicitudes pendientes</button>
-            <button class="btn btn-success" (click)="obtenerSolicitudesAprobadas()"> Solicitudes Aprobadas</button>
-            <button class="btn btn-danger" (click)="obtenerSolicitudesDenegadas()"> Solicitudes Denegadas</button>
-     
-      <form class="form-inline my-2 my-lg-0 ml-5">
-        <input class="form-control mr-sm-2" type="search" placeholder="Correlativo" aria-label="Buscar">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-      </form>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <button class="btn btn-secondary" (click)="obtenerSolicitudesPendientes()"> Solicitudes pendientes</button>
+        <button class="btn btn-success" (click)="obtenerSolicitudesAprobadas()"> Solicitudes Aprobadas</button>
+        <button class="btn btn-danger" (click)="obtenerSolicitudesDenegadas()"> Solicitudes Denegadas</button>
+
+        <form class="form-inline my-2 my-lg-0 ml-5">
+          <input type="search" name="correlativoSearch" #correlativoSearch="ngModel" [(ngModel)]="search" class="form-control mr-sm-2"
+            placeholder="Correlativo" aria-label="Buscar" />
+          <button class="btn btn-outline-success my-2 my-sm-0" (click)="obtenerSolicitudCorrelativo(search)">Buscar</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
   <div id="solicitudes" *ngIf="solicitudes">
     <div *ngFor="let solicitudList of solicitudes" class="item-solicitud">
 
       <div class="card my-4">
         <div class="card-header">
-          {{solicitudList.nombre_actividad}}
+          <h3>{{solicitudList.nombre_actividad}}</h3>
         </div>
         <div class="card-body">
-          <p class="card-text"><b>Correlativo:</b> {{solicitudList.correlativo}}</p>
-          <p class="card-text"><b>Nombre de la Actividad o Evento:</b> {{solicitudList.nombre_actividad}}</p>
-          <p class="card-text"><b>Local:</b> {{solicitudList.localID.nombre}}</p>
-          <p class="card-text"><b>Fecha de Solicitud:</b> {{ (solicitudList.fecha_solicitud | amFromUnix) | amLocale:'es' | amDateFormat:'LL'}}</p>
-          <p class="card-text"><b>Hora y Fecha de Inicio:</b> {{ (solicitudList.inicio_evento | amFromUnix) | amLocale:'es' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</p>
-          <p class="card-text"><b>Hora y Fecha de Fin:</b> {{ (solicitudList.fin_evento | amFromUnix) | amLocale:'es' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</p>
-          <p class="card-text"><b>Numero de Asistentes:</b> {{solicitudList.numero_asistentes}}</p>
-          <p class="card-text"><b>Responsable de la Actividad:</b> {{solicitudList.responsable_actividad}}</p>
-          <p class="card-text"><b>Unidad o Sección que lo Solicita:</b> {{solicitudList.unidad_solicitante}}</p>
-          <p class="card-text"><b>Jefe de la Unidad o Sección que lo Solicita:</b> {{solicitudList.jefe_unidad_solicitante}}</p>
-          <p class="card-text"><b>Status:</b> {{solicitudList.aprovacion}}</p>
-          <button class="btn btn-success mx-2" (click)="aprobarSolicitud(solicitudList._id)" *ngIf="solicitudList.aprovacion == 'Pendiente'"> Aprobar</button>
-          <button class="btn btn-danger mx-2" (click)="obtenerSolicitudesDenegadas()" *ngIf="solicitudList.aprovacion == 'Pendiente'"> Denegar</button>
+          <p class="card-text">
+            <b>Correlativo:</b> {{solicitudList.correlativo}}</p>
+          <p class="card-text">
+            <b>Nombre de la Actividad o Evento:</b> {{solicitudList.nombre_actividad}}</p>
+          <p class="card-text">
+            <b>Local:</b> {{solicitudList.localID.nombre}}</p>
+          <p class="card-text">
+            <b>Fecha de Solicitud:</b> {{ (solicitudList.fecha_solicitud | amFromUnix) | amLocale:'es' | amDateFormat:'LL'}}</p>
+          <p class="card-text">
+            <b>Hora y Fecha de Inicio:</b> {{ (solicitudList.inicio_evento | amFromUnix) | amLocale:'es' | amDateFormat:'MMMM
+            Do YYYY, h:mm:ss a'}}</p>
+          <p class="card-text">
+            <b>Hora y Fecha de Fin:</b> {{ (solicitudList.fin_evento | amFromUnix) | amLocale:'es' | amDateFormat:'MMMM Do YYYY,
+            h:mm:ss a'}}</p>
+          <p class="card-text">
+            <b>Numero de Asistentes:</b> {{solicitudList.numero_asistentes}}</p>
+          <p class="card-text">
+            <b>Responsable de la Actividad:</b> {{solicitudList.responsable_actividad}}</p>
+          <p class="card-text">
+            <b>Unidad o Sección que lo Solicita:</b> {{solicitudList.unidad_solicitante}}</p>
+          <p class="card-text">
+            <b>Jefe de la Unidad o Sección que lo Solicita:</b> {{solicitudList.jefe_unidad_solicitante}}</p>
+          <p class="card-text">
+            <b>Status:</b> {{solicitudList.aprovacion}}</p>
+          <button class="btn btn-success mx-2" (click)="aprobarSolicitud(solicitudList._id)" *ngIf="solicitudList.aprovacion == 'Pendiente'">
+            Aprobar</button>
+          <button class="btn btn-danger mx-2" (click)="denegarSolicitud(solicitudList._id)" *ngIf="solicitudList.aprovacion == 'Pendiente'">
+            Denegar</button>
+          <button class="btn btn-outline-danger float-right" (click)="eliminarSolicitud(solicitudList._id)">Eliminar</button>
         </div>
       </div>
 

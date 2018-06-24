@@ -23,11 +23,25 @@ export class SolicitudService {
         return this._http.post(this.URL + 'nueva-solicitud', params, { headers: headers });
     }
 
+    eliminarSolicitud(token, id): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
+        return this._http.delete(this.URL + 'solicitud-delete/' + id, { headers: headers });
+    }
+
     obtenerSolicitudes(token, page = 1): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', token);
 
         return this._http.get(this.URL + 'obtener-solicitudes/' + page, { headers: headers });
+    }
+
+    obtenerSolicitudCorrelativo(token, correlativo): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
+        return this._http.get(this.URL + 'obtener-solicitud-correlativo/' + correlativo, { headers: headers });
     }
 
     obtenerSolicitudesAprovadas(token, page = 1): Observable<any> {
@@ -61,7 +75,7 @@ export class SolicitudService {
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', token);
 
-        return this._http.put(this.URL + 'denegar-solicitud/' + id, { headers: headers });
+        return this._http.put(this.URL + 'denegar-solicitud/' + id, null, { headers: headers });
     }
 
 }

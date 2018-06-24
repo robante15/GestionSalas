@@ -12,6 +12,10 @@
     margin-top: 2rem;
 }
 
+.title-solicitud{
+  size: 10em;
+}
+
 nav .navbar{
   background-color: #f44336 !important;
 }

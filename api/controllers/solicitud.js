@@ -358,7 +358,7 @@ function aprobarSolicitud(req, res){
 function denegarSolicitud(req, res){
     var solicitudID = req.params.id;
 
-    Solicitud.findByIdAndUpdate(solicitudID, {aprovacion:'Aprovado'}, {new : true} ,(err, solicitudActualizada) => {
+    Solicitud.findByIdAndUpdate(solicitudID, {aprovacion:'Denegado'}, {new : true} ,(err, solicitudActualizada) => {
         if (err) return res.status(500).send({
             message: 'Error: Error en la peticion',
             Error: err
@@ -369,7 +369,7 @@ function denegarSolicitud(req, res){
         });
 
         return res.status(200).send({
-            message: 'Solicitud aprovada correctamente',
+            message: 'Solicitud denegada correctamente',
             solicitudActualizada
         });
     });

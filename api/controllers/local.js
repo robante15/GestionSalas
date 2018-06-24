@@ -122,6 +122,31 @@ function obtenerLocalesTodos(req, res) {
     });
 }
 
+function obtenerLocalesTodosSinPag(req, res) {
+
+
+    if (req.params.pagina) {
+        pagina = req.params.pagina;
+    }
+
+
+    Local.find({}, (err, locales) => {
+        if (err) return res.status(500).send({
+            message: 'Error: Error en la peticion',
+            Error: err
+        });
+
+        if (!locales) return res.status(404).send({
+            message: 'Error: No hay solicitudes disponibles'
+        });
+
+        return res.status(200).send({
+            locales
+        });
+    }
+    ).sort('nombre').populate('ubicacion');
+}
+
 //Elimina un local
 function eliminarLocal(req, res) {
     var localID = req.params.id;
@@ -147,6 +172,7 @@ module.exports = {
     guardarLocal,
     obtenerLocal, 
     obtenerLocalesUbicacion,
+    obtenerLocalesTodosSinPag,
     obtenerLocalesTodos,
     eliminarLocal
 }

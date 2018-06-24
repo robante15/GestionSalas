@@ -23,4 +23,12 @@ export class SolicitudService {
         return this._http.post(this.URL + 'nueva-solicitud', params, { headers: headers });
     }
 
+    obtenerSolicitudes(token, page = 1): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
+        return this._http.get(this.URL + 'obtener-solicitudes/' + page, { headers: headers });
+
+    }
+
 }

@@ -1,0 +1,72 @@
+<div class="col-lg-6 container">
+  <h1>{{title}}</h1>
+  <div id="solicitudes" *ngIf="solicitudes && solicitudes.length == 0">
+
+    <div class="item-solicitud">
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <h1> Lo sentimos, no hay ni una solicitud para mostrar</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="card">
+  <div class="card-body">
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary active">
+        <input type="radio" name="options" id="option1" autocomplete="off" checked> Solicitudes Pendientes
+      </label>
+      <label class="btn btn-success">
+        <input type="radio" name="options" id="option2" autocomplete="off"> Solicitudes Aprovadas
+      </label>
+      <label class="btn btn-danger">
+        <input type="radio" name="options" id="option3" autocomplete="off"> Solicitudes Denegadas
+      </label>
+
+
+      <form class="form-inline my-2 my-lg-0 ml-5">
+        <input class="form-control mr-sm-2" type="search" placeholder="Correlativo" aria-label="Buscar">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+  <div id="solicitudes" *ngIf="solicitudes">
+    <div *ngFor="let solicitudList of solicitudes" class="item-solicitud">
+
+      <div class="card my-4">
+        <div class="card-header">
+          {{solicitudList.nombre_actividad}}
+        </div>
+        <div class="card-body">
+          <p class="card-text"><b>Correlativo:</b> {{solicitudList.correlativo}}</p>
+          <p class="card-text"><b>Nombre de la Actividad o Evento:</b> {{solicitudList.nombre_actividad}}</p>
+          <p class="card-text"><b>Local:</b> {{solicitudList.localID.nombre}}</p>
+          <p class="card-text"><b>Fecha de Solicitud:</b> {{ (solicitudList.fecha_solicitud | amFromUnix) | amLocale:'es' | amDateFormat:'LL'}}</p>
+          <p class="card-text"><b>Hora y Fecha de Inicio:</b> {{ (solicitudList.inicio_evento | amFromUnix) | amLocale:'es' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</p>
+          <p class="card-text"><b>Hora y Fecha de Fin:</b> {{ (solicitudList.fin_evento | amFromUnix) | amLocale:'es' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</p>
+          <p class="card-text"><b>Numero de Asistentes:</b> {{solicitudList.numero_asistentes}}</p>
+          <p class="card-text"><b>Responsable de la Actividad:</b> {{solicitudList.responsable_actividad}}</p>
+          <p class="card-text"><b>Unidad o Sección que lo Solicita:</b> {{solicitudList.unidad_solicitante}}</p>
+          <p class="card-text"><b>Jefe de la Unidad o Sección que lo Solicita:</b> {{solicitudList.jefe_unidad_solicitante}}</p>
+          <p class="card-text"><b>Status:</b> {{solicitudList.aprovacion}}</p>
+          <a href="#" class="btn btn-success mx-2" *ngIf="solicitudList.aprovacion == 'pendiente'">Aprovar</a>
+          <a href="#" class="btn btn-danger mx-2" *ngIf="solicitudList.aprovacion == 'pendiente'">Denegar</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-12 text-center" *ngIf="solicitudes && solicitudes.length">
+  <p>
+    <button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
+      Cargar más solicitudes
+    </button>
+  </p>
+</div>

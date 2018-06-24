@@ -6,13 +6,15 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { nuevaSolicitudComponent } from './components/nuevaSolicitud/nuevaSolicitud.component';
+import { verSolicitudesComponent } from './components/verSolicitudes/verSolicitudes.component';
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegisterComponent },
     { path: 'home', component: HomeComponent},
-    { path: 'nuevaSolicitud', component: nuevaSolicitudComponent}
+    { path: 'nuevaSolicitud', component: nuevaSolicitudComponent},
+    { path: 'verSolicitudes', component: verSolicitudesComponent}
 ];
 
 export const appRoutingProviders:any[] = [];

@@ -23,10 +23,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" [routerLink]="['/nuevaSolicitud']" [routerLinkActive]="['active']">Nueva Solicitud</a>
-          <a class="dropdown-item" href="#">Ver Solicitudes</a>
-          <a class="dropdown-item" href="#">Solicitudes Pendientes</a>
-          <a class="dropdown-item" href="#">Solicitudes Aprovadas</a>
-          <a class="dropdown-item" href="#">Solicitudes Denegadas</a>
+          <a class="dropdown-item" [routerLink]="['/verSolicitudes']" [routerLinkActive]="['active']">Ver Solicitudes</a>
         </div>
       </li>
 
@@ -60,7 +57,6 @@
           {{identity.nombre}} {{identity.apellido}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/nuevaSolicitud']" [routerLinkActive]="['active']">Nueva Solicitud</a>
           <a class="dropdown-item" href="#">Ver Perfil</a>
           <a class="dropdown-item" href="#">Modificar Perfil</a>
           <a class="dropdown-item" href="#">Enviar Sugerencia</a>

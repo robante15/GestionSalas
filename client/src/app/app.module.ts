@@ -4,14 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
-import { Moment } from 'moment';
+import { MomentModule } from 'angular2-moment';
 
 //Cargar componentes
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppComponent } from './app.component';
-import { HomeComponent }  from './components/home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { nuevaSolicitudComponent } from './components/nuevaSolicitud/nuevaSolicitud.component'
+import { verSolicitudesComponent } from './components/verSolicitudes/verSolicitudes.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +20,16 @@ import { nuevaSolicitudComponent } from './components/nuevaSolicitud/nuevaSolici
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    nuevaSolicitudComponent
+    nuevaSolicitudComponent,
+    verSolicitudesComponent
   ],
   imports: [
     BrowserModule,
     routing,
     FormsModule,
     HttpClientModule,
-    DlDateTimePickerDateModule
+    DlDateTimePickerDateModule,
+    MomentModule
   ],
   providers: [
     appRoutingProviders

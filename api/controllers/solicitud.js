@@ -79,7 +79,7 @@ function obtenerSolicitudes(req, res) {
         pagina = req.params.pagina;
     }
 
-    Solicitud.find().sort('correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+    Solicitud.find().sort('-correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
         .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' })
         .paginate(pagina, items_por_pagina, (err, solicitudes, total) => {
             if (err) return res.status(500).send({

@@ -31,8 +31,8 @@ function nuevaSolicitud(req, res) {
     solicitud.correlativo = params.correlativo;
     solicitud.fecha_solicitud = moment().unix();
     solicitud.nombre_actividad = params.nombre_actividad;
-    solicitud.inicio_evento = params.inicio_evento;
-    solicitud.fin_evento = params.fin_evento;
+    solicitud.inicio_evento = moment(params.inicio_evento).unix();
+    solicitud.fin_evento = moment(params.fin_evento).unix();
     solicitud.numero_asistentes = params.numero_asistentes;
     solicitud.responsable_actividad = params.responsable_actividad;
     solicitud.unidad_solicitante = params.unidad_solicitante;

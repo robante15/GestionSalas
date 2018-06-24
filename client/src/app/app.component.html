@@ -13,11 +13,52 @@
           </a>
         </li>
 
-        <li>
-          <a href="#">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="glyphicon glyphicon glyphicon-list-alt"></span>
             Solicitudes
+            <span class="caret"></span>
           </a>
+
+
+          <ul class="dropdown-menu">
+
+            <li>
+              <a [routerLink]="['/nuevaSolicitud']" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-plus"></span>
+                Nueva Solicitud
+              </a>
+            </li>
+
+            <li>
+              <a [routerLink]="['/perfil/'+identity._id]" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-search"></span>
+                Ver Solicitudes
+              </a>
+            </li>
+
+            <li>
+              <a [routerLink]="['/mis-datos']" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-inbox"></span>
+                Solicitudes Pendientes
+              </a>
+            </li>
+
+            <li>
+              <a [routerLink]="['/sugerencias']" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-ok"></span>
+                Solicitudes Aprovadas
+              </a>
+            </li>
+
+            <li>
+              <a [routerLink]="['/sugerencias']" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-remove"></span>
+                Solicitudes Denegadas
+              </a>
+            </li>
+
+          </ul>
         </li>
 
         <li>
@@ -27,6 +68,9 @@
           </a>
         </li>
       </ul>
+
+
+
 
       <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
 
@@ -44,6 +88,8 @@
           </a>
         </li>
       </ul>
+
+
 
 
       <ul class="nav navbar-nav navbar-right" *ngIf="identity">

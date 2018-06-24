@@ -34,7 +34,7 @@ function nuevaSolicitud(req, res) {
     solicitud.inicio_evento = params.inicio_evento;
     solicitud.fin_evento = params.fin_evento;
     solicitud.numero_asistentes = params.numero_asistentes;
-    solicitud.rasponsable_actividad = params.rasponsable_actividad;
+    solicitud.responsable_actividad = params.responsable_actividad;
     solicitud.unidad_solicitante = params.unidad_solicitante;
     solicitud.jefe_unidad_solicitante = params.jefe_unidad_solicitante;
     solicitud.aprovacion = 'pendiente';

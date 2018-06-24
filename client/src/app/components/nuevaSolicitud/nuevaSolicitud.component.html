@@ -1,0 +1,96 @@
+<div class="col-lg-6">
+  <h1>{{title}}</h1>
+
+  <div class="alert alert-success" *ngIf="status == 'Correcto'">
+    Solicitud ingresada de manera correcta
+  </div>
+
+  <div class="alert alert-danger" *ngIf="status != 'nada' && status != 'Correcto'">
+    {{status}}
+  </div>
+
+  <form #solicitudForm="ngForm" (ngSubmit)="onSubmit(solicitudForm)" class="col-lg-10">
+    <p>
+      <label>Correlativo</label>
+      <input type="text" name="correlativo" #correlativo="ngModel" [(ngModel)]="solicitudOBJ.correlativo" class="form-control"
+        required />
+      <span *ngIf="!correlativo.valid && correlativo.touched">
+        El local obligatorio
+      </span>
+    </p>
+
+    <p>
+      <label>Local</label>
+      <input type="text" name="local" #local="ngModel" [(ngModel)]="solicitudOBJ.localID" class="form-control" required />
+      <span *ngIf="!local.valid && local.touched">
+        El local obligatorio
+      </span>
+    </p>
+
+    <p>
+      <label>Nombre de la actividad o evento</label>
+      <input type="text" name="nombre_actividad" #nombre_actividad="ngModel" [(ngModel)]="solicitudOBJ.nombre_actividad" class="form-control"
+        required />
+      <span *ngIf="!nombre_actividad.valid && nombre_actividad.touched">
+        El nombre de la actividad o evento es obligatorio
+      </span>
+    </p>
+
+    <p>
+      <label>Fecha y Hora de Inicio</label>
+      <input type="text" name="inicio_evento" #inicio_evento="ngModel" [(ngModel)]="solicitudOBJ.inicio_evento" class="form-control"
+        required />
+      <span *ngIf="!inicio_evento.valid && inicio_evento.touched">
+        Debe de ingresar una fecha y hora de inicio del evento
+      </span>
+    </p>
+
+    <p>
+      <label>Fecha y Hora de Fin</label>
+      <input type="text" name="fin_evento" #fin_evento="ngModel" [(ngModel)]="solicitudOBJ.fin_evento" class="form-control" required
+      />
+      <span *ngIf="!fin_evento.valid && fin_evento.touched">
+        Debe de ingresar una fecha y hora de la finalización del evento
+      </span>
+    </p>
+
+    <p>
+      <label>Numero de asistentes</label>
+      <input type="text" name="numero_asistentes" #numero_asistentes="ngModel" [(ngModel)]="solicitudOBJ.numero_asistentes" class="form-control"
+        required />
+      <span *ngIf="!numero_asistentes.valid && numero_asistentes.touched">
+        Debe de ingresar un numero de asistentes
+      </span>
+    </p>
+
+    <p>
+      <label>Responsable de la actividad</label>
+      <input type="text" name="responsable_actividad" #responsable_actividad="ngModel" [(ngModel)]="solicitudOBJ.responsable_actividad"
+        class="form-control" required />
+      <span *ngIf="!responsable_actividad.valid && responsable_actividad.touched">
+        Debe de ingresar una fecha y hora de la finalización del evento
+      </span>
+    </p>
+
+    <p>
+      <label>Unidad Solicitante</label>
+      <input type="text" name="unidad_solicitante" #unidad_solicitante="ngModel" [(ngModel)]="solicitudOBJ.unidad_solicitante"
+        class="form-control" required />
+      <span *ngIf="!unidad_solicitante.valid && unidad_solicitante.touched">
+        Debe de ingresar una fecha y hora de la finalización del evento
+      </span>
+    </p>
+
+    <p>
+      <label>Jefe de la Unidad Solicitante</label>
+      <input type="text" name="jefe_unidad_solicitante" #jefe_unidad_solicitante="ngModel" [(ngModel)]="solicitudOBJ.jefe_unidad_solicitante"
+        class="form-control" required />
+      <span *ngIf="!jefe_unidad_solicitante.valid && jefe_unidad_solicitante.touched">
+        Debe de ingresar una fecha y hora de la finalización del evento
+      </span>
+    </p>
+
+    <input type="submit" value="{{btn_solicitud}}" class="btn btn-success" [disabled]="!solicitudForm.form.valid" />
+
+  </form>
+</div>

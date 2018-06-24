@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { nuevaSolicitudComponent } from './components/nuevaSolicitud/nuevaSolicitud.component'
 import { verSolicitudesComponent } from './components/verSolicitudes/verSolicitudes.component';
+import { HorariosComponent } from './components/horarios/horarios.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { verSolicitudesComponent } from './components/verSolicitudes/verSolicitu
     RegisterComponent,
     HomeComponent,
     nuevaSolicitudComponent,
-    verSolicitudesComponent
+    verSolicitudesComponent,
+    HorariosComponent
   ],
   imports: [
     BrowserModule,

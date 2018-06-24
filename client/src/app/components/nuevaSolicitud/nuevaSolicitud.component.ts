@@ -44,12 +44,12 @@ export class nuevaSolicitudComponent implements OnInit {
 
     ngOnInit() {
         this.identity = this._usuarioService.getIdentity();
-        this.obtenerLocales(1);
+        this.obtenerLocales();
         console.log('Se ha inicializado el componente NuevaSolicitud');
     }
 
-    obtenerLocales(page) {
-        this._localService.obtenerLocales(this.token, page).subscribe(
+    obtenerLocales() {
+        this._localService.obtenerLocales(this.token).subscribe(
             response => {
                 this.listaLocales = response.locales;
                 console.log(this.listaLocales);

@@ -124,12 +124,6 @@ function obtenerLocalesTodos(req, res) {
 
 function obtenerLocalesTodosSinPag(req, res) {
 
-
-    if (req.params.pagina) {
-        pagina = req.params.pagina;
-    }
-
-
     Local.find({}, (err, locales) => {
         if (err) return res.status(500).send({
             message: 'Error: Error en la peticion',

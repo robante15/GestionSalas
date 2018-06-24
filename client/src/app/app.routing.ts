@@ -7,15 +7,18 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { nuevaSolicitudComponent } from './components/nuevaSolicitud/nuevaSolicitud.component';
 import { verSolicitudesComponent } from './components/verSolicitudes/verSolicitudes.component';
+import { HorariosComponent } from './components/horarios/horarios.component';
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegisterComponent },
-    { path: 'home', component: HomeComponent},
-    { path: 'nuevaSolicitud', component: nuevaSolicitudComponent},
-    { path: 'verSolicitudes', component: verSolicitudesComponent}
+    { path: 'home', component: HomeComponent },
+    { path: 'nuevaSolicitud', component: nuevaSolicitudComponent },
+    { path: 'verSolicitudes', component: verSolicitudesComponent },
+    { path: 'horarios', component: HorariosComponent }
+
 ];
 
-export const appRoutingProviders:any[] = [];
+export const appRoutingProviders: any[] = [];
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

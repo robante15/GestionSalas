@@ -272,6 +272,38 @@ function obtenerSolicitudesPendientes(req, res) {
         });
 }
 
+//Obtener solicitudes según local
+function obtenerSolicitudesLocal(req, res) {
+    var pagina = 1;
+    var items_por_pagina = 10;
+
+    if (req.params.pagina) {
+        pagina = req.params.pagina;
+    }
+
+    Solicitud.find({localID : req.params.localID}).sort('-correlativo').populate({ path: 'localID', select: 'capacidad text ubicacion nombre' })
+        .populate({ path: 'administrador_sistema', select: 'nombre apellido usuario' })
+        .paginate(pagina, items_por_pagina, (err, solicitudes, total) => {
+            if (err) return res.status(500).send({
+                message: 'Error: Error en la peticion',
+                Error: err
+            });
+
+            if (!solicitudes) return res.status(404).send({
+                message: 'Error: No hay solicitudes disponibles'
+            });
+
+            return res.status(200).send({
+                total_items: total,
+                paginas: Math.ceil(total / items_por_pagina),
+                pagina: pagina,
+                items_por_pagina: items_por_pagina,
+                solicitudes
+            })
+
+        });
+}
+
 //Obtener solicitudes segun correlativo
 function obtenerSolicitudesCorrelativo(req, res) {
     Solicitud.findOne({
@@ -381,6 +413,7 @@ module.exports = {
     probando,
     nuevaSolicitud,
     obtenerSolicitudes,
+    obtenerSolicitudesLocal,
     obtenerSolicitudesCorrelativo,
     obtenerDisponibilidadHoraFecha,
     obtenerDisponibilidadHoraFechaAprobadas,

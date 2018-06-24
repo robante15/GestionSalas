@@ -15,7 +15,14 @@ export class LocalService {
         this.URL = GLOBAL.url;
     }
 
-    obtenerLocales(token, page = 1): Observable<any> {
+    obtenerLocales(token): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+        return this._http.get(this.URL + 'obtener-todos-locales-sinpag/', { headers: headers });
+
+    }
+
+    obtenerLocalesPaginados(token, page = 1): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', token);
 

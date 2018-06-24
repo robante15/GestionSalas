@@ -1,0 +1,62 @@
+<div class="col-lg-6 container">
+  <h1>{{title}}</h1>
+
+  <div class="col-lg-10">
+    <p>
+      <label>Seleccionar Local</label>
+      <!--Listado de locales -->
+      <select *ngIf="listaLocales" name="locales" #locales="ngModel" [(ngModel)]="localID" class="form-control" required>
+        <option *ngFor="let listaLocal of listaLocales" value="{{listaLocal._id}}">{{listaLocal.nombre}}</option>
+      </select>
+    </p>
+
+    <button class="btn btn-secondary" (click)="obtenerSolicitudesLocal(pagina,localID)"> Mostar Horarios</button>
+
+  </div>
+
+
+  <div id="solicitudes" *ngIf="solicitudes">
+    <div *ngFor="let solicitudList of solicitudes" class="item-solicitud">
+
+      <div class="card my-4">
+        <div class="card-header">
+          <h3>{{solicitudList.nombre_actividad}}</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            <b>Correlativo:</b> {{solicitudList.correlativo}}</p>
+          <p class="card-text">
+            <b>Nombre de la Actividad o Evento:</b> {{solicitudList.nombre_actividad}}</p>
+          <p class="card-text">
+            <b>Local:</b> {{solicitudList.localID.nombre}}</p>
+          <p class="card-text">
+            <b>Fecha de Solicitud:</b> {{ (solicitudList.fecha_solicitud | amFromUnix) | amLocale:'es' | amDateFormat:'LL'}}</p>
+          <p class="card-text">
+            <b>Hora y Fecha de Inicio:</b> {{ (solicitudList.inicio_evento | amFromUnix) | amLocale:'es' | amDateFormat:'MMMM
+            Do YYYY, h:mm:ss a'}}</p>
+          <p class="card-text">
+            <b>Hora y Fecha de Fin:</b> {{ (solicitudList.fin_evento | amFromUnix) | amLocale:'es' | amDateFormat:'MMMM Do YYYY,
+            h:mm:ss a'}}</p>
+          <p class="card-text">
+            <b>Numero de Asistentes:</b> {{solicitudList.numero_asistentes}}</p>
+          <p class="card-text">
+            <b>Responsable de la Actividad:</b> {{solicitudList.responsable_actividad}}</p>
+          <p class="card-text">
+            <b>Unidad o Sección que lo Solicita:</b> {{solicitudList.unidad_solicitante}}</p>
+          <p class="card-text">
+            <b>Jefe de la Unidad o Sección que lo Solicita:</b> {{solicitudList.jefe_unidad_solicitante}}</p>
+          <p class="card-text">
+            <b>Status:</b> {{solicitudList.aprovacion}}</p>
+          <button class="btn btn-success mx-2" (click)="aprobarSolicitud(solicitudList._id)" *ngIf="solicitudList.aprovacion == 'Pendiente'">
+            Aprobar</button>
+          <button class="btn btn-danger mx-2" (click)="denegarSolicitud(solicitudList._id)" *ngIf="solicitudList.aprovacion == 'Pendiente'">
+            Denegar</button>
+          <button class="btn btn-outline-danger float-right" (click)="eliminarSolicitud(solicitudList._id)">Eliminar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

@@ -337,7 +337,28 @@ function eliminarSolicitud(req, res) {
 function aprobarSolicitud(req, res){
     var solicitudID = req.params.id;
 
-    Solicitud.findByIdAndUpdate(solicitudID, {aprovacion:'true'}, {new : true} ,(err, solicitudActualizada) => {
+    Solicitud.findByIdAndUpdate(solicitudID, {aprovacion:'Aprovado'}, {new : true} ,(err, solicitudActualizada) => {
+        if (err) return res.status(500).send({
+            message: 'Error: Error en la peticion',
+            Error: err
+        });
+
+        if (!solicitudActualizada) return res.status(404).send({
+            message: 'Error: No hay solicitudes disponibles'
+        });
+
+        return res.status(200).send({
+            message: 'Solicitud aprovada correctamente',
+            solicitudActualizada
+        });
+    });
+}
+
+//Aprueba una solicitud segun ID
+function denegarSolicitud(req, res){
+    var solicitudID = req.params.id;
+
+    Solicitud.findByIdAndUpdate(solicitudID, {aprovacion:'Aprovado'}, {new : true} ,(err, solicitudActualizada) => {
         if (err) return res.status(500).send({
             message: 'Error: Error en la peticion',
             Error: err
@@ -369,5 +390,6 @@ module.exports = {
     aprobarSolicitud,
     obtenerSolicitudesAprovadas,
     obtenerSolicitudesDenegadas,
-    obtenerSolicitudesPendientes
+    obtenerSolicitudesPendientes,
+    denegarSolicitud
 }

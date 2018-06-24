@@ -54,6 +54,26 @@ export class verSolicitudesComponent implements OnInit {
         this.obtenerSolicitudes(this.pagina);
     }
 
+    aprobarSolicitud(id) {
+        this._solicitudService.aprovarSolicitud(this.token, id).subscribe(
+            response => {
+                if (!response.solicitud) {
+                    this.status = 'Error';
+                } else {
+                    this.status = 'Correcto';
+                }
+            },
+            error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if (errorMessage != null) {
+                    this.status = 'Error';
+                }
+            }
+        );
+    }
+
     obtenerSolicitudes(pagina, adding = false) {
         if (this.selector != 'Todas') {
             this.solicitudes = [];

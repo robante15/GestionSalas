@@ -26,5 +26,6 @@ api.delete('/solicitud-delete/:id', md_auth.ensuerAuth, SolicitudController.elim
 
 //Metodo PUT
 api.put('/aprobar-solicitud/:id', md_auth.ensuerAuth, SolicitudController.aprobarSolicitud);
+api.put('/denegar-solicitud/:id', md_auth.ensuerAuth, SolicitudController.denegarSolicitud);
 
 module.exports = api;

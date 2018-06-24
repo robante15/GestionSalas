@@ -51,4 +51,17 @@ export class SolicitudService {
         return this._http.get(this.URL + 'obtener-solicitudes-denegadas/' + page, { headers: headers });
     }
 
+    aprovarSolicitud(token, id): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', token);
+        console.log(headers);
+        return this._http.put(this.URL + 'aprobar-solicitud/' + id, null,{ headers: headers });
+    }
+
+    denegarSolicitud(token, id): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
+        return this._http.put(this.URL + 'denegar-solicitud/' + id, { headers: headers });
+    }
+
 }

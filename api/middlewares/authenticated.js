@@ -6,7 +6,9 @@ var secret = 'EkCPSkl6cq5EWBj';
 
 exports.ensuerAuth = function(req, res, next){
     if(!req.headers.authorization){
-        return res.status(403).send({message: 'Error: La peticion no tiene la cabecera de autorizacion'});
+        return res.status(403).send({message: 'Error: La peticion no tiene la cabecera de autorizacion',
+        TESTO: req.headers
+    });
     }
 
     var token = req.headers.authorization.replace(/['"]+/g,'');

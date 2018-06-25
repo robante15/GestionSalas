@@ -34,6 +34,7 @@ export class HorariosComponent implements OnInit {
     public items_por_pagina;
     public solicitudes: Solicitud[];
     public localID: string;
+    public selector: string;
 
     constructor(
         private _route: ActivatedRoute,
@@ -42,6 +43,7 @@ export class HorariosComponent implements OnInit {
         private _solicitudService: SolicitudService,
         private _usuarioService: UsuarioService
     ) {
+        this.solicitudes = [];
         this.identity = this._usuarioService.getIdentity();
         this.title = 'Horarios';
         this.user = new Usuario("", "", "", "", "", "", "", "", "");
@@ -68,7 +70,52 @@ export class HorariosComponent implements OnInit {
 
     obtenerSolicitudesLocal(pagina, adding = false, localID) {
 
-        this._solicitudService.obtenerSolicitudesLocal(this.token, pagina, localID).subscribe(
+        if (this.selector != this.localID) {
+            this.solicitudes = [];
+            this.selector = this.localID;
+        }
+
+        this._solicitudService.obtenerSolicitudesLocal(this.token, pagina, this.localID).subscribe(
+            response => {
+                if (response.solicitudes) {
+                    this.total = response.total_items;
+                    this.paginas = response.paginas;
+                    this.items_por_pagina = response.items_por_pagina;
+                    if (!adding) {
+                        this.solicitudes = response.solicitudes;
+                    } else {
+                        var arrayA = this.solicitudes;
+                        var arrayB = response.solicitudes;
+                        this.solicitudes = arrayA.concat(arrayB);
+
+                        $("html, body").animate({ scrollTop: $('body').prop("scrollHeight") }, 500);
+
+                    }
+
+                    if (pagina > this.paginas) {
+                        this._router.navigate(['/verSolicitudes']);
+                    }
+                } else {
+                    this.status = 'Error';
+                }
+            }, error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+                if (errorMessage != null) {
+                    this.status = 'Error';
+                }
+            }
+        );
+    }
+
+    obtenerSolicitudesLocalAprobadas(pagina, adding = false, localID) {
+
+        if (this.selector != this.localID) {
+            this.solicitudes = [];
+            this.selector = this.localID;
+        }
+
+        this._solicitudService.obtenerSolicitudesLocalAprobadas(this.token, pagina, this.localID).subscribe(
             response => {
                 if (response.solicitudes) {
                     this.total = response.total_items;

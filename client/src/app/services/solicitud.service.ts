@@ -44,6 +44,13 @@ export class SolicitudService {
         return this._http.get(this.URL + 'obtener-solicitudes-local/' + page +'/' + localID, { headers: headers });
     }
 
+    obtenerSolicitudesLocalAprobadas(token, page = 1, localID): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
+        return this._http.get(this.URL + 'obtener-solicitudes-local-aprobadas/' + page +'/' + localID, { headers: headers });
+    }
+
     obtenerSolicitudCorrelativo(token, correlativo): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', token);

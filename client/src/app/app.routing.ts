@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { nuevaSolicitudComponent } from './components/nuevaSolicitud/nuevaSolicitud.component';
 import { verSolicitudesComponent } from './components/verSolicitudes/verSolicitudes.component';
 import { HorariosComponent } from './components/horarios/horarios.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -16,7 +17,8 @@ const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'nuevaSolicitud', component: nuevaSolicitudComponent },
     { path: 'verSolicitudes', component: verSolicitudesComponent },
-    { path: 'horarios', component: HorariosComponent }
+    { path: 'horarios', component: HorariosComponent },
+    { path: 'admin', component: AdminComponent}
 
 ];
 

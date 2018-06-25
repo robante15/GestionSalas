@@ -14,6 +14,7 @@ import { HomeComponent } from './components/home/home.component';
 import { nuevaSolicitudComponent } from './components/nuevaSolicitud/nuevaSolicitud.component'
 import { verSolicitudesComponent } from './components/verSolicitudes/verSolicitudes.component';
 import { HorariosComponent } from './components/horarios/horarios.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HorariosComponent } from './components/horarios/horarios.component';
     HomeComponent,
     nuevaSolicitudComponent,
     verSolicitudesComponent,
-    HorariosComponent
+    HorariosComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

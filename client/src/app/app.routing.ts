@@ -10,7 +10,7 @@ import { verSolicitudesComponent } from './components/verSolicitudes/verSolicitu
 import { HorariosComponent } from './components/horarios/horarios.component';
 
 const appRoutes: Routes = [
-    { path: '', component: LoginComponent },
+    { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegisterComponent },
     { path: 'home', component: HomeComponent },

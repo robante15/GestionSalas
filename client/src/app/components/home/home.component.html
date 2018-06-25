@@ -1,32 +1,37 @@
 <div class="col-lg-10 container">
 
   <div class="jumbotron">
-    <h1 class="h1-strong">{{title}}</h1>
-    <p>Disfruta de las publicaciones de tus amigos y comparte tu vida</p>
+    <h1 class="h1-strong text-center">{{title}}</h1>
 
-    <p>
-      <a [routerLink]="['/perfil',user._id]" class="btn btn-success btn-lg" role="button">
-        Perfil
+    <img src="http://www.ues.edu.sv/storage/app/media/minerva2.png" style="width: 25%;" class="rounded mx-auto my-3 d-block" alt="Responsive image">
+
+    <h2>
+      <p class="text-center">Universidad de El Salvador</p>
+      <p class="text-center">Facultad Multidisciplinaria Oriental</p>
+      <p class="text-center">Sección de Planificación</p>
+    </h2>
+
+    <div class="d-flex justify-content-center">
+      <a [routerLink]="['/nuevaSolicitud']" class="btn btn-primary btn-lg mx-2" role="button">
+        Nueva Solicitud
       </a>
-
-      <a [routerLink]="['/timeline']" class="btn btn-primary btn-lg" role="button">
-        Timeline
+      <a [routerLink]="['/verSolicitudes']" class="btn btn-success btn-lg mx-2" role="button">
+        Ver Solicitudes
       </a>
-
-      <a [routerLink]="['/usuarios']" class="btn btn-default btn-lg" role="button">
-        Usuarios
+      <a [routerLink]="['/horarios']" class="btn btn-info btn-lg mx-2" role="button">
+        Horarios
       </a>
-
-    </p>
+    </div>
 
   </div>
 
 </div>
 
-<footer class="footer">
+<footer class="">
   <div class="container">
-    <p class="text-muted">Sistema de Gestión de Salas para la UES-FMO ha sido desarrollado por estudiantes de la carrera de Ingeniería de Sistemas Informaticos de Tercer Año
-      , la aplicación todavía se encuentra en fase de desarrollo y puede contener bugs, y ser suceptible a cambios
+    <p class="text-muted">Sistema de Gestión de Salas para la UES-FMO ha sido desarrollado por estudiantes de la carrera de Ingeniería de Sistemas
+      Informaticos de Tercer Año , la aplicación todavía se encuentra en fase de desarrollo y puede contener bugs, y ser
+      suceptible a cambios
     </p>
     <p class="text-muted">Universidad de El Salvador, Facultad Multidisciplinaria Oriental, CICLO I - 2018</p>
   </div>
